@@ -38,7 +38,7 @@
 
 .entry-content > * {
 
-	@apply max-w-content mx-auto;
+	@apply max-w-content mx-auto text-cloudburst;
 }
 
 .entry-content > .alignwide {
