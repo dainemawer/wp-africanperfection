@@ -67,6 +67,11 @@ module.exports = {
 			...getThemeColors(),
 			/* Include additional palette colors as appropriate to fill in gaps for brand colors */
 			gray: colors.gray,
+			cloudburst: '#1e2b4e',
+			bunting: '#111d3b',
+		},
+		fontFamily: {
+			century: ['Century Gothic', 'sans-serif'],
 		},
 		extend: {
 			/* Extend the default theme */
