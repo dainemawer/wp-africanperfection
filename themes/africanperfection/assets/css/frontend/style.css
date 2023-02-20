@@ -11,6 +11,7 @@
  * Use the @layer base { ... } directive to add to Tailwind's base layer
  * More info: https://tailwindcss.com/docs/adding-custom-styles#adding-base-styles
  */
+
 @import url("tailwindcss/base");
 
 /**

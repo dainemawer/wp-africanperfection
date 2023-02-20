@@ -11,8 +11,15 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/WordPress/WordPress-Coding-Standards"
+    }
+  ],
   "require-dev": {
-    "10up/phpcs-composer": "dev-master"
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "wp-coding-standards/wpcs": "dev-develop#2.3.0-fix-vsprintf"
   },
   "scripts": {
     "lint": "phpcs .",

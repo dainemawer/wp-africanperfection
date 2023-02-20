@@ -3,16 +3,17 @@
   "version": 2,
   "settings": {
     "color": {
-      "defaultPalette": false,
+      "defaultPalette": true,
       "defaultGradients": false,
       "defaultDuotone": false,
-      "custom": false,
+      "custom": true,
       "customDuotone": false,
       "customGradient": false,
       "duotone": [],
       "gradients": [],
-      "link": false,
-      "palette": []
+      "background": true,
+      "link": true,
+      "text": true
     },
     "custom": {
       "width": {
@@ -34,13 +35,6 @@
       "lineHeight": false,
       "dropCap": false,
       "fontSizes": []
-    },
-    "blocks": {
-      "core/button": {
-        "color": {
-          "palette": []
-        }
-      }
     }
   },
   "styles": {

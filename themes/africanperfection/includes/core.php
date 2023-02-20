@@ -29,9 +29,9 @@ function setup() {
 	add_action( 'wp_head', $n( 'js_detection' ), 0 );
 	add_action( 'wp_head', $n( 'add_manifest' ), 10 );
 	add_action( 'wp_head', $n( 'embed_ct_css' ), 0 );
+	add_action( 'init', $n( 'ap_custom_post_type' ) );
 
 	add_filter( 'script_loader_tag', $n( 'script_loader_tag' ), 10, 2 );
-	add_filter( 'tenup_available_blocks', $n( 'enable_custom_blocks' ) );
 }
 
 /**
@@ -56,6 +56,24 @@ function theme_setup() {
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'editor-styles' );
 	add_theme_support(
+		'editor-color-palette',
+		array(
+			'editor-color-palette',
+			array(
+				array(
+					'name'  => esc_html__( 'Black', '@@textdomain' ),
+					'slug'  => 'black',
+					'color' => '#2a2a2a',
+				),
+				array(
+					'name'  => esc_html__( 'Gray', '@@textdomain' ),
+					'slug'  => 'gray',
+					'color' => '#727477',
+				),
+			),
+		)
+	);
+	add_theme_support(
 		'html5',
 		array(
 			'search-form',
@@ -63,9 +81,22 @@ function theme_setup() {
 		)
 	);
 
+	$defaults = array(
+		'height'               => 75,
+		'width'                => 225,
+		'flex-height'          => false,
+		'flex-width'           => false,
+		'header-text'          => array( 'site-title', 'site-description' ),
+		'unlink-homepage-logo' => true,
+	);
+
+	add_theme_support( 'custom-logo', $defaults );
+
 	add_editor_style( 'dist/css/frontend.css' );
 
 	remove_theme_support( 'core-block-patterns' );
+
+	remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
 
 	// by adding the `theme.json` file block templates automatically get enabled.
 	// because the template editor will need additional QA and work to get right
@@ -75,7 +106,8 @@ function theme_setup() {
 	// This theme uses wp_nav_menu() in three locations.
 	register_nav_menus(
 		array(
-			'primary' => esc_html__( 'Primary Menu', 'tenup-theme' ),
+			'header' => esc_html__( 'Header Menu', 'tenup-theme' ),
+			'footer' => esc_html__( 'Footer Menu', 'tenup-theme' ),
 		)
 	);
 }
@@ -99,32 +131,15 @@ function scripts() {
 		true
 	);
 
-	if ( is_page_template( 'templates/page-styleguide.php' ) ) {
+	if ( is_page( 'gallery' ) ) {
 		wp_enqueue_script(
-			'styleguide',
-			TENUP_THEME_TEMPLATE_URL . '/dist/js/styleguide.js',
-			Utility\get_asset_info( 'styleguide', 'dependencies' ),
-			Utility\get_asset_info( 'styleguide', 'version' ),
+			'lightbox',
+			TENUP_THEME_TEMPLATE_URL . '/dist/js/lightbox.js',
+			Utility\get_asset_info( 'lightbox', 'dependencies' ),
+			Utility\get_asset_info( 'lightbox', 'version' ),
 			true
 		);
 	}
-
-	/**
-	 * Enqueuing shared.js is required to get css hot reloading working in the frontend
-	 * If you're not shipping any shared js wrap this enqueue in a SCRIPT_DEBUG check.
-	 */
-
-	/*
-	 * Uncoment this to use the shared.js file.
-		wp_enqueue_script(
-			'shared',
-			TENUP_THEME_TEMPLATE_URL . '/dist/js/shared.js',
-			Utility\get_asset_info( 'shared', 'dependencies' ),
-			Utility\get_asset_info( 'shared', 'version' ),
-			true
-		);
-	*/
-
 }
 
 /**
@@ -182,7 +197,7 @@ function admin_styles() {
 	wp_enqueue_style(
 		'admin-style',
 		TENUP_THEME_TEMPLATE_URL . '/dist/css/admin.css',
-		[],
+		array(),
 		Utility\get_asset_info( 'admin-style', 'version' )
 	);
 
@@ -207,19 +222,18 @@ function styles() {
 	wp_enqueue_style(
 		'styles',
 		TENUP_THEME_TEMPLATE_URL . '/dist/css/frontend.css',
-		[],
+		array(),
 		Utility\get_asset_info( 'frontend', 'version' )
 	);
 
-	if ( is_page_template( 'templates/page-styleguide.php' ) ) {
+	if ( is_page( 'gallery' ) ) {
 		wp_enqueue_style(
-			'styleguide',
-			TENUP_THEME_TEMPLATE_URL . '/dist/css/styleguide.css',
-			[],
-			Utility\get_asset_info( 'styleguide-style', 'version' )
+			'gallery',
+			TENUP_THEME_TEMPLATE_URL . '/dist/css/gallery.css',
+			array(),
+			Utility\get_asset_info( 'gallery', 'version' )
 		);
 	}
-
 }
 
 /**
@@ -296,22 +310,25 @@ function embed_ct_css() {
 
 	if ( ! $debug_performance ) {
 		return;
-	};
+	}
 
 	wp_register_style( 'ct', false ); // phpcs:ignore
 	wp_enqueue_style( 'ct' );
 	wp_add_inline_style( 'ct', 'head{--ct-is-problematic:solid;--ct-is-affected:dashed;--ct-notify:#0bce6b;--ct-warn:#ffa400;--ct-error:#ff4e42}head,head [rel=stylesheet],head script,head script:not([src])[async],head script:not([src])[defer],head script~meta[http-equiv=content-security-policy],head style,head>meta[charset]:not(:nth-child(-n+5)){display:block}head [rel=stylesheet],head script,head script~meta[http-equiv=content-security-policy],head style,head title,head>meta[charset]:not(:nth-child(-n+5)){margin:5px;padding:5px;border-width:5px;background-color:#fff;color:#333}head ::before,head script,head style{font:16px/1.5 monospace,monospace;display:block}head ::before{font-weight:700}head link[rel=stylesheet],head script[src]{border-style:var(--ct-is-problematic);border-color:var(--ct-warn)}head script[src]::before{content:"[Blocking Script – " attr(src) "]"}head link[rel=stylesheet]::before{content:"[Blocking Stylesheet – " attr(href) "]"}head script:not(:empty),head style:not(:empty){max-height:5em;overflow:auto;background-color:#ffd;white-space:pre;border-color:var(--ct-notify);border-style:var(--ct-is-problematic)}head script:not(:empty)::before{content:"[Inline Script] "}head style:not(:empty)::before{content:"[Inline Style] "}head script:not(:empty)~title,head script[src]:not([async]):not([defer]):not([type=module])~title{display:block;border-style:var(--ct-is-affected);border-color:var(--ct-error)}head script:not(:empty)~title::before,head script[src]:not([async]):not([defer]):not([type=module])~title::before{content:"[<title> blocked by JS] "}head [rel=stylesheet]:not([media=print]):not(.ct)~script,head style:not(:empty)~script{border-style:var(--ct-is-affected);border-color:var(--ct-warn)}head [rel=stylesheet]:not([media=print]):not(.ct)~script::before,head style:not(:empty)~script::before{content:"[JS blocked by CSS – " attr(src) "]"}head script[src][src][async][defer]{display:block;border-style:var(--ct-is-problematic);border-color:var(--ct-warn)}head script[src][src][async][defer]::before{content:"[async and defer is redundant: prefer defer – " attr(src) "]"}head script:not([src])[async],head script:not([src])[defer]{border-style:var(--ct-is-problematic);border-color:var(--ct-warn)}head script:not([src])[async]::before{content:"The async attribute is redundant on inline scripts"}head script:not([src])[defer]::before{content:"The defer attribute is redundant on inline scripts"}head [rel=stylesheet][href^="//"],head [rel=stylesheet][href^=http],head script[src][src][src^="//"],head script[src][src][src^=http]{border-style:var(--ct-is-problematic);border-color:var(--ct-error)}head script[src][src][src^="//"]::before,head script[src][src][src^=http]::before{content:"[Third Party Blocking Script – " attr(src) "]"}head [rel=stylesheet][href^="//"]::before,head [rel=stylesheet][href^=http]::before{content:"[Third Party Blocking Stylesheet – " attr(href) "]"}head script~meta[http-equiv=content-security-policy]{border-style:var(--ct-is-problematic);border-color:var(--ct-error)}head script~meta[http-equiv=content-security-policy]::before{content:"[Meta CSP defined after JS]"}head>meta[charset]:not(:nth-child(-n+5)){border-style:var(--ct-is-problematic);border-color:var(--ct-warn)}head>meta[charset]:not(:nth-child(-n+5))::before{content:"[Charset should appear as early as possible]"}link[rel=stylesheet].ct,link[rel=stylesheet][media=print],script[async],script[defer],script[type=module],style.ct{display:none}' );
-
 }
 
-function enable_custom_blocks()
-{
-	return [
-		'accordion',
-		'accordion-item',
-		'simple-accordion-item',
-		'button',
-		'tabs',
-		'tabs-item',
-	];
+function ap_custom_post_type() {
+	register_post_type(
+		'accommodation',
+		array(
+			'labels'       => array(
+				'name'          => __( 'Accommodation', 'african-perfection' ),
+				'singular_name' => __( 'Accommodation', 'african-perfection' ),
+			),
+			'supports'     => array( 'title', 'editor', 'custom-fields', 'excerpt', 'thumbnail' ),
+			'public'       => true,
+			'show_in_rest' => true,
+			'has_archive'  => false,
+		)
+	);
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the header.
  *
@@ -8,16 +9,18 @@
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
-	<head>
-		<meta charset="<?php bloginfo( 'charset' ); ?>" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<?php wp_head(); ?>
-	</head>
-	<body <?php body_class(); ?>>
-		<?php wp_body_open(); ?>
 
-		<a href="#main" class="skip-to-content-link visually-hidden-focusable"><?php echo esc_html_e( 'Skip to main content', 'tenup-theme' ); ?></a>
+<head>
+	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<?php wp_head(); ?>
+</head>
 
-		<main id="main" role="main" tabindex="-1">
+<body id="top" <?php body_class( 'relative' ); ?>>
+	<?php wp_body_open(); ?>
 
-			<h1><?php bloginfo( 'name' ); ?></h1>
+	<?php get_template_part( 'template-parts/content', 'header' ); ?>
+	<?php get_template_part( 'template-parts/content', 'backtotop' ); ?>
+
+	<main id="main" role="main" tabindex="-1">
+		<div id="overlay" class="absolute w-screen h-screen right-0 left-0 top-0 bottom-0 bg-[#000] opacity-0 transition-opacity pointer-events-none"></div>

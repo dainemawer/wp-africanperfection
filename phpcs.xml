@@ -3,7 +3,8 @@
 	<description>10up PHPCS extended.</description>
 	<exclude-pattern>dist/</exclude-pattern>
 	<exclude-pattern>plugins/*</exclude-pattern>
-	<rule ref="10up-Default" />
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<rule ref="WordPress" />
 
 	<arg name="colors"/>
 </ruleset>

@@ -1,10 +1,10 @@
-const colors = require('tailwindcss/colors');
-const purgecssWordpress = require('purgecss-with-wordpress');
+const colors            = require( 'tailwindcss/colors' );
+const purgecssWordpress = require( 'purgecss-with-wordpress' );
 
 // Tailwind Plugins
-const typographyPlugin = require('@tailwindcss/typography');
-const { getThemeColors } = require('./includes/tailwind-helpers');
-// const formsPlugin = require('@tailwindcss/forms');
+const typographyPlugin   = require( '@tailwindcss/typography' );
+const formsPlugin        = require( '@tailwindcss/forms' );
+const { getThemeColors } = require( './includes/tailwind-helpers' );
 // const aspectRatioPlugin = require('@tailwindcss/aspect-ratio');
 // const lineClampPlugin = require('@tailwindcss/line-clamp');
 
@@ -22,7 +22,6 @@ module.exports = {
 		 * would normally be fine but Gutenberg has issues with styles to raw buttons and anchors, and they need to be
 		 * prefixed with :where(:not(.components-button)) and where(:not(.components-external-link)) respectively so the
 		 * styles don't end up leaking out of the editor.
-		 *
 		 */
 		preflight: false,
 	},
@@ -53,6 +52,7 @@ module.exports = {
 		'includes/**/*.{js, php}',
 		'partials/**/*.php',
 		'templates/**/*.php',
+		'template-parts/**/*.php',
 	],
 	safelist: [...purgecssWordpress.safelist],
 	theme: {
@@ -103,7 +103,7 @@ module.exports = {
 		/* Default form input styling
 			See: https://tailwindcss.com/docs/plugins#forms
 		*/
-		// formsPlugin,
+		formsPlugin,
 		/*
 			Adds the ability to use classes like aspect-w-16 aspect-h-9 including arbitrary values
 			See: https://tailwindcss.com/docs/plugins#aspect-ratio
