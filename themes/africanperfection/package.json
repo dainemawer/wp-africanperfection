@@ -33,7 +33,7 @@
       "shared": "./assets/js/shared/shared.js",
       "styleguide": "./assets/js/styleguide/styleguide.js",
       "core-block-overrides": "./includes/core-block-overrides.js",
-      "example-block": "./includes/blocks/example-block/index.js",
+      "accordion": "./includes/blocks/accordion/index.js",
       "gallery": "./assets/css/gallery.css",
       "lightbox": "./assets/js/frontend/gallery.js"
     }

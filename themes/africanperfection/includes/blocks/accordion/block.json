@@ -1,8 +1,8 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "title": "Example Block",
-  "description": "An Example Block",
+  "title": "Accordion Block",
+  "description": "An Accordion Block",
   "textdomain": "tenup-theme",
   "name": "tenup/example",
   "icon": "feedback",
@@ -10,6 +10,9 @@
   "attributes":{
     "title": {
       "type" : "string"
+    },
+    "content": {
+      "type": "string"
     }
   },
   "example": {
@@ -20,6 +23,6 @@
   "supports": {
     "html": false
   },
-  "editorScript": "file:../../../dist/blocks/example-block/editor.js",
-  "editorStyle": "file:../../../dist/blocks/example-block/editor.css"
+  "editorScript": "file:../../../dist/blocks/accordion/editor.js",
+  "editorStyle": "file:../../../dist/blocks/accordion/editor.css"
 }

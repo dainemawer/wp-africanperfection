@@ -3,7 +3,6 @@
 .alignleft {
 
 	@apply float-left mr-4 text-left;
-
 }
 
 .alignright {
@@ -44,6 +43,11 @@
 .entry-content-wide > * {
 
 	@apply max-w-5xl mx-auto text-cloudburst;
+}
+
+.entry-content-wider > * {
+
+	@apply max-w-screen-xl mx-auto text-cloudburst;
 }
 
 .entry-content-wide > .entry-title {
@@ -102,7 +106,7 @@
 }
 
 .goverlay {
-	background: rgba(0, 0, 0, 0.85) !important;
+	background: rgba(0 0 0 / 85%) !important;
 }
 
 .wp-block-group.has-background {
@@ -113,4 +117,117 @@
 body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
 
 	@apply max-w-5xl;
+}
+
+.wp-element-button,
+.wp-block-button__link {
+
+	@apply text-[#fff] no-underline rounded-none uppercase text-sm border-2 border-transparent py-2 px-4 lg:py-3 bg-bunting transition-all;
+
+	&:hover,
+	&:focus {
+
+		@apply border-cloudburst bg-[#fff] text-bunting;
+	}
+}
+
+.is-layout-flow.wp-block-column {
+
+	& h5 + h3 {
+
+		@apply mt-0;
+	}
+
+	& .wp-block-image {
+
+		@apply my-0;
+	}
+}
+
+
+.is-layout-flow.wp-block-group {
+
+	& h5 + h2 {
+
+		@apply mt-0;
+	}
+}
+
+.is-layout-flex.wp-block-columns + .wp-block-separator {
+
+	@apply mb-6;
+}
+
+.is-layout-flex.wp-block-columns {
+
+	@apply my-10 lg:my-20;
+}
+
+.wp-block-separator {
+
+	@apply mb-6;
+}
+
+.wp-block-cover {
+
+	@apply mt-4;
+}
+
+.wp-embed-aspect-16-9 {
+	position: relative;
+
+	& .wp-block-embed__wrapper {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		top: 0;
+	}
+
+	& iframe {
+		height: 100%;
+		width: 100%;
+	}
+
+	&::before {
+		content: "";
+		display: block;
+		padding-top: 56.25%;
+	}
+}
+
+.wp-block-column-reverse {
+
+	@apply flex-col-reverse lg:flex-row;
+}
+
+.wp-block-embed {
+
+	@apply m-0;
+}
+
+.single-accommodation .wp-block-columns {
+
+	@apply my-8;
+}
+
+.single-accommodation .wp-block-columns h2 {
+
+	@apply mt-0;
+}
+
+.accordion-block {
+
+	@apply bg-[#ececec] py-4 px-8 first:mb-4;
+}
+
+.accordion-block .wp-block-columns {
+
+	@apply my-4;
+}
+
+.accordion-block .wp-block-tenup-example__content h3 {
+
+	@apply mt-0;
 }
