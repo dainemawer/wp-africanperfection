@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The main template file
  *
@@ -14,7 +13,6 @@ get_header(); ?>
 		the_post();
 		?>
 		<div class="entry-content entry-content-wide my-8 lg:my-16 prose-headings:text-cloudburst">
-			<h1 class="entry-title"><?php the_title(); ?></h1>
 			<?php the_content(); ?>
 		</div>
 	<?php endwhile; ?>

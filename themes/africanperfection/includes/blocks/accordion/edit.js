@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 // Importing the block's editor styles via JS will enable hot reloading for css
 import './editor.css';
@@ -33,6 +33,7 @@ const ExampleBlockEdit = (props) => {
 				value={title}
 				onChange={(title) => setAttributes({ title })}
 			/>
+			<InnerBlocks />
 		</div>
 	);
 };

@@ -33,7 +33,7 @@
 			@apply border-cloudburst opacity-100;
 		}
 
-		& li:not(:last-child) > a {
+		& > li:not(:last-child) {
 
 			@apply mr-3 lg:mr-6;
 		}
@@ -96,7 +96,7 @@
 
 		& .sub-menu {
 
-			@apply lg:absolute lg:w-[208px] bg-[#fff] lg:shadow-md lg:top-full lg:left-0 lg:opacity-0 lg:invisible transition-all;
+			@apply lg:absolute lg:w-[208px] bg-[#fff] lg:shadow-md lg:top-full lg:right-0 lg:opacity-0 lg:invisible transition-all;
 		}
 
 		& .active > .sub-menu {

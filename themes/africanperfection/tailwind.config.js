@@ -1,10 +1,10 @@
-const colors            = require( 'tailwindcss/colors' );
-const purgecssWordpress = require( 'purgecss-with-wordpress' );
+const colors = require('tailwindcss/colors');
+const purgecssWordpress = require('purgecss-with-wordpress');
 
 // Tailwind Plugins
-const typographyPlugin   = require( '@tailwindcss/typography' );
-const formsPlugin        = require( '@tailwindcss/forms' );
-const { getThemeColors } = require( './includes/tailwind-helpers' );
+const typographyPlugin = require('@tailwindcss/typography');
+const formsPlugin = require('@tailwindcss/forms');
+const { getThemeColors } = require('./includes/tailwind-helpers');
 // const aspectRatioPlugin = require('@tailwindcss/aspect-ratio');
 // const lineClampPlugin = require('@tailwindcss/line-clamp');
 
@@ -50,6 +50,7 @@ module.exports = {
 		// Directories
 		'assets/**/*.js',
 		'includes/**/*.{js, php}',
+		'includes/blocks/**/*.{js, php}',
 		'partials/**/*.php',
 		'templates/**/*.php',
 		'template-parts/**/*.php',
