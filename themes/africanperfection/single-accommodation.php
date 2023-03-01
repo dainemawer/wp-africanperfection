@@ -12,7 +12,7 @@ get_header(); ?>
 	while ( have_posts() ) :
 		the_post();
 		?>
-		<div class="entry-content entry-content-wide my-8 lg:my-16 prose-headings:text-cloudburst">
+		<div class="entry-content entry-content-wide my-0 prose-headings:text-cloudburst">
 			<?php the_content(); ?>
 		</div>
 	<?php endwhile; ?>

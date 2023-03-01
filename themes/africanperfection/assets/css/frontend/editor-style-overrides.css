@@ -6,8 +6,22 @@
  * Licensed under the MIT license.
  */
 
- .wp-block-tenup-accordion .accordion-header-container .accordion-header {
-	display: block;
-	margin: 1.5rem 0;
-	width: 100%;
- }
+.editor-styles-wrapper .block-editor-block-list__layout :where(img):not(:where([class~="not-prose"] *)) {
+	margin-top: 0 !important;
+}
+
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+	max-width: 1200px !important;
+}
+
+.post-type-accommodation .editor-styles-wrapper .wp-block.is-layout-flow.wp-block-group h2 {
+	margin-top: 0;
+}
+
+.post-type-accommodation .editor-styles-wrapper .wp-block.wp-block-tenup-example .wp-block-columns {
+	margin: 0 0 2rem;
+}
+
+.post-type-accommodation .editor-styles-wrapper .wp-block.wp-block-tenup-example .wp-block-columns h3 {
+	margin-top: 0;
+}

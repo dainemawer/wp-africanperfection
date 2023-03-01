@@ -40,6 +40,12 @@
 	@apply max-w-content mx-auto text-cloudburst;
 }
 
+.entry-content > *:not(.wp-block-cover) {
+
+	@apply px-6;
+}
+
+
 .entry-content-wide > * {
 
 	@apply max-w-5xl mx-auto text-cloudburst;
@@ -102,7 +108,7 @@
 .block-editor-block-list__layout,
 .entry-content {
 
-	@apply max-w-none prose px-4;
+	@apply max-w-none prose;
 }
 
 .goverlay {
@@ -149,23 +155,18 @@ body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alig
 
 	& h5 + h2 {
 
-		@apply mt-0;
+		@apply mt-0 mb-12;
 	}
 }
 
 .is-layout-flex.wp-block-columns + .wp-block-separator {
 
-	@apply mb-6;
+	@apply mb-12;
 }
 
 .is-layout-flex.wp-block-columns {
 
 	@apply my-10 lg:my-20;
-}
-
-.wp-block-separator {
-
-	@apply mb-6;
 }
 
 .wp-block-cover {
@@ -174,26 +175,11 @@ body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alig
 }
 
 .wp-embed-aspect-16-9 {
-	position: relative;
 
-	& .wp-block-embed__wrapper {
-		bottom: 0;
-		left: 0;
-		position: absolute;
-		right: 0;
-		text-align: center;
-		top: 0;
-	}
-
-	& iframe {
+	& .wp-block-embed__wrapper iframe {
+		aspect-ratio: 16 / 9;
 		height: 100%;
 		width: 100%;
-	}
-
-	&::before {
-		content: "";
-		display: block;
-		padding-top: 56.25%;
 	}
 }
 
@@ -204,7 +190,7 @@ body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alig
 
 .wp-block-embed {
 
-	@apply m-0;
+	@apply my-0;
 }
 
 .single-accommodation .wp-block-columns {
@@ -228,6 +214,26 @@ body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alig
 }
 
 .accordion-block .wp-block-tenup-example__content h3 {
+
+	@apply mt-0;
+}
+
+.wp-block-cover.alignfull {
+
+	@apply mt-0 mb-12;
+}
+
+.wp-block-cover.alignfull h1 {
+
+	@apply text-6xl mb-0;
+}
+
+.wp-block-cover.alignfull h2 {
+
+	@apply mt-6;
+}
+
+.wp-block-gallery.has-nested-images {
 
 	@apply mt-0;
 }
