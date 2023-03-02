@@ -154,4 +154,15 @@
 
 		@apply border-cloudburst bg-[#fff] text-bunting;
 	}
+
+	.wp-block-gallery a {
+
+		@apply transition-opacity;
+	}
+
+	.wp-block-gallery a:hover,
+	.wp-block-gallery a:focus {
+
+		@apply opacity-70;
+	}
 }
